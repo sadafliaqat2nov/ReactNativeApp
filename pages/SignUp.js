@@ -85,7 +85,7 @@ class SignUp extends Component {
     
     SignUp() {
         //Handler for the Submit onPress
-        fetch('https://cbff3230.ngrok.io/api/v1/users', {    
+        fetch('https://ec71365d.ngrok.io/api/v1/users', {    
             method: 'POST',
             headers: {
             'Accept': 'application/json',
@@ -156,7 +156,8 @@ class SignUp extends Component {
                         <TextInput
                             style={styles.Input}
                             placeholder="Enter Unique Password..."
-                            ref="email"
+                            ref="email" 
+                            secureTextEntry={true}
                             onChangeText={TextInputPassword => this.setState({ TextInputPassword })}
                         />
                         {
@@ -169,7 +170,7 @@ class SignUp extends Component {
                                 onPress={this.SignUp.bind(this)}
                             />
                         </TouchableHighlight>
-                        <Text style={{ fontSize: 15, color: 'blue', textAlign: 'center', fontWeight: 'bold', marginBottom: 100, fontFamily: 'monospace' }} onPress={() => this.props.navigation.navigate('SignIn')}>
+                        <Text style={{ fontSize: 15, color: 'blue', textAlign: 'center', fontWeight: 'bold', marginBottom: 100, fontFamily: 'monospace' }} onPress={() => this.props.navigation.push('SignIn')}>
                             Have already an account? SignIn</Text>
                     </View>
                     </ScrollView>

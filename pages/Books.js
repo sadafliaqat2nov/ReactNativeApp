@@ -30,7 +30,7 @@ class Books extends Component {
 	// onPageLoad this function automatically call to fetch API data in table
 	
 componentDidMount() {
-	fetch("https://cbff3230.ngrok.io/api/v1/books", {
+	fetch("https://ec71365d.ngrok.io/api/v1/books", {
 		method: 'GET',
 		headers: {
 				'Accept': 'application/json',
@@ -63,7 +63,7 @@ componentDidMount() {
 
 //  OnPress save button, overlay form data create the book
 createBook(){
-	fetch('https://cbff3230.ngrok.io/api/v1/books', {    
+	fetch('https://ec71365d.ngrok.io/api/v1/books', {    
 		method: 'POST',
 		headers: {
 		'Accept': 'application/json',
@@ -96,7 +96,7 @@ createBook(){
 
 // editBook(edit){ 
 // 	 console.log(edit)
-// 	fetch('https://cbff3230.ngrok.io/api/v1/books/', {   
+// 	fetch('https://ec71365d.ngrok.io/api/v1/books/', {   
 // 		method: 'put',
 // 		headers: {
 // 		'Accept': 'application/json',
@@ -129,7 +129,7 @@ createBook(){
 //  OnPress delete button, book delete from table
 
 deleteBook(del){		 
-	fetch('https://cbff3230.ngrok.io/api/v1/books/'+ this[0], {
+	fetch('https://ec71365d.ngrok.io/api/v1/books/'+ this[0], {
 		method: 'DELETE', 
 		headers: {
 			'Accept': 'application/json',
@@ -161,7 +161,7 @@ deleteBook(del){
 // onPress row navigate to show details of respective book
 
 	DetailsShow(data,nstate) {
-		fetch("https://cbff3230.ngrok.io/api/v1/books/" + this[0], {
+		fetch("https://ec71365d.ngrok.io/api/v1/books/" + this[0], {
 			method: 'GET',
 			headers: {
 					'Accept': 'application/json',

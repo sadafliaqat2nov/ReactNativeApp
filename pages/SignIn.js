@@ -15,7 +15,7 @@ export default class SignIn extends Component {
               }
             SignIn() {
                     //Handler for the Submit onPress
-                    fetch('https://cbff3230.ngrok.io/api/v1/users/sign_in', {    
+                    fetch('https://ec71365d.ngrok.io/api/v1/users/sign_in', {    
                         method: 'POST',
                         headers: {
                         'Accept': 'application/json',
@@ -57,12 +57,13 @@ export default class SignIn extends Component {
             <Text style={{ fontSize: 25, textAlign: 'center', fontWeight: 'bold', marginBottom: 30, fontFamily: 'monospace' }}>Sign In</Text>
                     <TextInput
                         style={{ height: 40, borderColor: 'gray', margin: 5, borderWidth: 1, fontSize: 20, textAlign: 'center', fontWeight: 'bold', fontFamily: 'monospace' }}
-                        placeholder="Enter Username..." 
+                        placeholder="Enter Email..." 
                         onChangeText={TextInputUsername => this.setState({ TextInputUsername })}
                     />
                     <TextInput
                         style={{ height: 40, borderColor: 'gray', margin: 5, borderWidth: 1, fontSize: 20, textAlign: 'center', fontWeight: 'bold', fontFamily: 'monospace' }}
                         placeholder="Enter Password..."
+                        secureTextEntry={true}
                         onChangeText={TextInputPassword => this.setState({ TextInputPassword })}
                     />
                     <TouchableHighlight
@@ -79,7 +80,7 @@ export default class SignIn extends Component {
                             onPress={this.SignIn.bind(this)}
                         />
                     </TouchableHighlight>
-                    <Text style={{ fontSize: 15, color: 'blue', textAlign: 'center', fontWeight: 'bold', marginBottom: 30, fontFamily: 'monospace' }} onPress={() => this.props.navigation.navigate('SignUp')}>Create New Account! SignUp</Text>
+                    <Text style={{ fontSize: 15, color: 'blue', textAlign: 'center', fontWeight: 'bold', marginBottom: 30, fontFamily: 'monospace' }} onPress={() => this.props.navigation.push('SignUp')}>Create New Account! SignUp</Text>
             </View>
             </ImageBackground>
         )
