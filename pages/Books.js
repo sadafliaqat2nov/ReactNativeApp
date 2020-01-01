@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, Modal, TouchableOpacity, Alert, Button, ActivityIndicator, Grid } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Modal, TouchableOpacity, Alert, 
+	Button, ActivityIndicator, 
+	Grid, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Header, Overlay, Input } from 'react-native-elements';
 import { Table, TableWrapper, Row, Cell, Col, Cols, Rows } from 'react-native-table-component';
 import { Left, Right, Icon } from 'native-base';
@@ -30,7 +32,7 @@ class Books extends Component {
 	// onPageLoad this function automatically call to fetch API data in table
 	
 componentDidMount() {
-	fetch("https://ec71365d.ngrok.io/api/v1/books", {
+	fetch("https://9b7b4bbf.ngrok.io/api/v1/books", {
 		method: 'GET',
 		headers: {
 				'Accept': 'application/json',
@@ -63,7 +65,7 @@ componentDidMount() {
 
 //  OnPress save button, overlay form data create the book
 createBook(){
-	fetch('https://ec71365d.ngrok.io/api/v1/books', {    
+	fetch('https://9b7b4bbf.ngrok.io/api/v1/books', {    
 		method: 'POST',
 		headers: {
 		'Accept': 'application/json',
@@ -96,7 +98,7 @@ createBook(){
 
 // editBook(edit){ 
 // 	 console.log(edit)
-// 	fetch('https://ec71365d.ngrok.io/api/v1/books/', {   
+// 	fetch('https://9b7b4bbf.ngrok.io/api/v1/books/', {   
 // 		method: 'put',
 // 		headers: {
 // 		'Accept': 'application/json',
@@ -129,7 +131,7 @@ createBook(){
 //  OnPress delete button, book delete from table
 
 deleteBook(del){		 
-	fetch('https://ec71365d.ngrok.io/api/v1/books/'+ this[0], {
+	fetch('https://9b7b4bbf.ngrok.io/api/v1/books/'+ this[0], {
 		method: 'DELETE', 
 		headers: {
 			'Accept': 'application/json',
@@ -161,7 +163,7 @@ deleteBook(del){
 // onPress row navigate to show details of respective book
 
 	DetailsShow(data,nstate) {
-		fetch("https://ec71365d.ngrok.io/api/v1/books/" + this[0], {
+		fetch("https://9b7b4bbf.ngrok.io/api/v1/books/" + this[0], {
 			method: 'GET',
 			headers: {
 					'Accept': 'application/json',
@@ -203,6 +205,7 @@ render() {
 
 				{/* Overlay to create a book in table */}
 <Overlay transparent={true} isVisible={this.state.isVisible}>
+<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
 	<View style={styles.overlay}>
 			<Text style={styles.formText}>Add Information about Book!</Text>
 			<Icon
@@ -256,6 +259,7 @@ render() {
 			</TouchableOpacity>
 			</View>
 		</View>
+		</TouchableWithoutFeedback>
 </Overlay>
 		<TouchableOpacity style={styles.buttonContainer} onPress={() => { this.toggleOverlay(true) }}>
 				<Text style={styles.btnText}>Create Book <Icon name="add-circle" style={{ color: '#fff', fontSize: 25 }}></Icon></Text>
@@ -263,6 +267,7 @@ render() {
 
 {/* Overlay to create a book in table */}
 <Overlay transparent={true} isVisible={this.state.isVisible}>
+<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
 	<View style={styles.overlay}>
 			<Text style={styles.formText}>Update Information about Book!</Text>
 			<Icon
@@ -320,6 +325,7 @@ render() {
 			</TouchableOpacity>
 			</View>
 		</View>
+		</TouchableWithoutFeedback>
 </Overlay>
 
 		{/* table which display details of book */}
@@ -337,9 +343,9 @@ render() {
 					<View style={styles.activityIndicatorHolder}>
 					<ActivityIndicator
 					size="large"
-					color="#C00"
+					color="#037699"
 					/>
-					<Text style={styles.texthead} style={{color:'#C00'}}>Loading...</Text>
+					<Text style={styles.texthead} style={{color:'#037699'}}>Loading...</Text>
 					</View>
 					</View>
 					</Modal>

@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { Dimensions,Platform,Text,Item, View, TextInput, Button, Alert, StyleSheet, ScrollView, Picker } from 'react-native';
-import { ImageBackground, TouchableHighlight } from 'react-native';
-// import Icon from "react-native-vector-icons/Ionicons";
+import { ImageBackground, TouchableHighlight, Image, TouchableWithoutFeedback, Keyboard, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements'
-//fimport { Picker } from 'native-base'
-
-import * as Font from 'expo-font';
 // import { AppLoading, Font } from "expo-font";
+import * as Font from 'expo-font';
 const window_width = Dimensions.get('window').width;
 //import all the components we are going to use.
 
@@ -85,7 +82,7 @@ class SignUp extends Component {
     
     SignUp() {
         //Handler for the Submit onPress
-        fetch('https://ec71365d.ngrok.io/api/v1/users', {    
+        fetch('https://9b7b4bbf.ngrok.io/api/v1/users', {    
             method: 'POST',
             headers: {
             'Accept': 'application/json',
@@ -129,52 +126,61 @@ class SignUp extends Component {
         const { navigate } = this.props.navigation;
         if (this.state.isfontLoaded){
           return (
-                <ImageBackground source={require('../images/image1.png')} style={{ width: '100%', height: '100%' }} >
-                        <ScrollView>
-                    <View style={{ padding: 10, flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
-                        <Text style={{ fontSize: 25, textAlign: 'center', marginBottom: 30, marginTop: 100, fontFamily: 'monospace' }}>Sign Up</Text>
-                        <Text>
-                        </Text>
-                        <TextInput
-                            style={styles.Input}
-                            placeholder=" Enter First Name..." 
-                            ref="Fname"
-                            onChangeText={TextInputFname => this.setState({ TextInputFname })}
-                        />
-                        <TextInput
-                            style={styles.Input}
-                            placeholder="Enter Last Name..." 
-                            ref="Sname"
-                            onChangeText={TextInputLname => this.setState({ TextInputLname })}
-                        />
-                        <TextInput
-                            style={styles.Input}
-                            placeholder="Enter Your Email..."
-                            ref="email"
-                            onChangeText={TextInputEmail => this.setState({ TextInputEmail })}
-                        />
-                        <TextInput
-                            style={styles.Input}
-                            placeholder="Enter Unique Password..."
-                            ref="email" 
-                            secureTextEntry={true}
-                            onChangeText={TextInputPassword => this.setState({ TextInputPassword })}
-                        />
-                        {
-                            this.showDropdown()
-                        } 
-                        <TouchableHighlight style={styles.btnSignUp}>
-                            <Button
-                                style={{ fontFamily: 'monospace' }}
-                                title="Sign Up"
-                                onPress={this.SignUp.bind(this)}
-                            />
-                        </TouchableHighlight>
-                        <Text style={{ fontSize: 15, color: 'blue', textAlign: 'center', fontWeight: 'bold', marginBottom: 100, fontFamily: 'monospace' }} onPress={() => this.props.navigation.push('SignIn')}>
+            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            <View style={styles.container}>
+            <View style={styles.header}>
+            <Icon name='user-plus' type='font-awesome' size={100} color={'#fff'}/>
+            <Text style={{ fontSize: 34, color: '#fff', textAlign: 'center', margin: 10, fontWeight: 'bold', fontFamily: 'monospace' }}> Sign Up </Text>
+            </View>
+            <View style={styles.container1}>
+            <View style={styles.SectionStyle}>
+              <Icon name='user' type='font-awesome' size={30} color={'#037699'} style={{margin: 10, padding: 10, marginLeft: 20}}/>
+              <TextInput
+                style={{ flex: 1, marginLeft: 10 }}
+                placeholder="Enter Your First Name"
+                underlineColorAndroid="transparent"
+                onChangeText={TextInputFname => this.setState({ TextInputFname })}
+              />
+            </View>
+            <View style={styles.SectionStyle}>
+              <Icon name='user' type='font-awesome' size={30} color={'#037699'} style={{margin: 10, padding: 10, marginLeft: 20}}/>
+              <TextInput
+                style={{ flex: 1, marginLeft: 10 }}
+                placeholder="Enter Your Last Name"
+                underlineColorAndroid="transparent"
+                onChangeText={TextInputLname => this.setState({ TextInputLname })}
+              />
+            </View>
+            <View style={styles.SectionStyle}>
+              <Icon name='envelope' type='font-awesome' size={30} color={'#037699'} style={{margin: 10, padding: 10, marginLeft: 20}}/>
+              <TextInput
+                style={{ flex: 1, marginLeft: 10 }}
+                placeholder="Enter Your Email Here"
+                underlineColorAndroid="transparent"
+                onChangeText={TextInputEmail => this.setState({ TextInputEmail })}
+              />
+            </View>
+             <View style={styles.SectionStyle}>
+              <Icon name='lock' type='font-awesome' size={38} color={'#037699'} style={{margin: 10, padding: 10, marginLeft: 20}}/>
+              <TextInput
+                style={{ flex: 1, marginLeft: 10 }}
+                placeholder="Enter Your Password"
+                underlineColorAndroid="transparent"
+                secureTextEntry={true}
+                onChangeText={TextInputPassword => this.setState({ TextInputPassword })}
+              />
+            </View>
+            {
+                this.showDropdown()
+            } 
+            <TouchableOpacity style={styles.button} onPress={this.SignUp.bind(this)}>
+            <Text style={styles.text}>Sign Up</Text>
+            </TouchableOpacity>
+            <Text style={{ fontSize: 15, color: '#037699', textAlign: 'center', fontWeight: 'bold', fontFamily: 'monospace', margin: 20 }} onPress={() => this.props.navigation.push('SignIn')}>
                             Have already an account? SignIn</Text>
-                    </View>
-                    </ScrollView>
-                </ImageBackground>
+        </View>
+        </View>
+        </TouchableWithoutFeedback>
             )
 
         }else{
@@ -185,6 +191,24 @@ class SignUp extends Component {
 export default SignUp;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  container1: {
+    flex: 1,
+    marginTop: -50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  header:{
+      backgroundColor: "#037699",
+      height: 350,
+      width: 500,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     Input: { 
         height: 40, 
         borderColor: 'gray', 
@@ -204,13 +228,39 @@ const styles = StyleSheet.create({
         textAlign: 'center', 
         fontWeight: 'bold', 
     },
-    btnSignUp:{
-        height: 50,
-        width: 100,
-        borderRadius: 10,
-        margin: 20,
-        alignSelf: 'center',
-    }
+  SectionStyle: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderWidth: 0.5,
+    borderColor: '#000',
+    height: 40,
+    padding: 10,
+    borderRadius: 5,
+    margin: 10,
+  },
+
+  button: {
+        display: 'flex',
+        height: 40,
+        width: 80,
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#037699',
+        shadowColor: '#2AC062',
+        shadowOpacity: 0.7,
+        shadowOffset: { height: 10, width: 0 },
+        shadowRadius: 20,
+        marginTop: 10,
+    },
+
+    text: {
+        fontSize: 14,
+        textTransform: 'uppercase',
+        color: '#fff',
+    },
 });
 
 

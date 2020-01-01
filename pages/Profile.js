@@ -11,7 +11,7 @@ export default class Profile extends Component {
     render() {
         const { navigate } = this.props.navigation;
         return (
-					<ImageBackground source={require('../images/image1.png')} style={{ width: '100%', height: '100%' }} >
+					
 					<View>
                 	<Header style={{height: 10}}
 					leftComponent= {<Icon name="menu" onPress={() => this.props.navigation.openDrawer()} />
@@ -24,25 +24,24 @@ export default class Profile extends Component {
             		<View style={styles.bodyContent}>
               		<Text style={styles.name}>{this.props.navigation.state.params.Username}</Text>
               		<Text style={styles.info}>React Native Developer</Text>
-              		<Text style={styles.description}>I'm Web developer. I can develop websites using React Native, Vuejs/Nuxtjs.</Text>  
+              		<Text style={styles.description}>I'm Web developer. I can develop Websites / Mobile Apps using React Native, Vuejs/Nuxtjs.</Text>  
               		<TouchableOpacity style={styles.buttonContainer}>
-                	<Text>Details</Text>  
+                	<Text style={{color:'#fff', fontWeight: 'bold', fontFamily: 'monospace'}}>Details</Text>  
               		</TouchableOpacity>              
               		<TouchableOpacity style={styles.buttonContainer}>
-                	<Text>Personal Information</Text> 
+                	<Text style={{color:'#fff', fontWeight: 'bold', fontFamily: 'monospace'}}>Personal Information</Text> 
               		</TouchableOpacity>
             		</View>
         			</View>
       				</View>
 					</View>
-					</ImageBackground>
 				)
     }
 }
 
 const styles = StyleSheet.create({
 	header:{
-	  backgroundColor: "#00BFFF",
+	  backgroundColor: "#037699",
 	  height:200,
 	},
 	avatar: {
@@ -76,13 +75,13 @@ const styles = StyleSheet.create({
 	  fontFamily: 'monospace'
 	},
 	info:{
-	  fontSize:16,
+	  fontSize:20,
 	  color: "#00BFFF",
 	  marginTop:10
 	},
 	description: {
-	  fontSize:16,
-	  color: "#696969",
+	  fontSize:18,
+	  color: "#037699",
 	  marginTop:10,
 	  textAlign: 'center'
 	},
@@ -95,6 +94,6 @@ const styles = StyleSheet.create({
 	  marginBottom:20,
 	  width:200,
 	  borderRadius:30,
-	  backgroundColor: "#00BFFF",
+	  backgroundColor: "#037699",
 	},
   });
