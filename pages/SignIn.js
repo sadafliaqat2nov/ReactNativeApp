@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
+import { Text, View, TextInput, Button, Alert, TouchableOpacity, Animated, Easing } from 'react-native';
 import { ImageBackground, TouchableHighlight, StyleSheet,Image,ScrollView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Icon } from 'react-native-elements'
 import { Header } from 'react-navigation-stack';
@@ -8,14 +8,29 @@ export default class SignIn extends Component {
 
       constructor(props) {
                 super(props);
+                this.animatedValue = new Animated.Value(0);
                 this.state = {
                   TextInputUsername: '',
                   TextInputPassword: '',
                 };
               }
+        componentDidMount () {
+          this.animate()
+        }
+        animate () {
+          this.animatedValue.setValue(0)
+          Animated.timing(
+            this.animatedValue,
+            {
+              toValue: 1,
+              duration: 2000,
+              easing: Easing.linear
+            }
+          ).start(() => this.animate())
+        }
             SignIn() {
                     //Handler for the Submit onPress
-                    fetch('https://9b7b4bbf.ngrok.io/api/v1/users/sign_in', {    
+                    fetch('https://77da6709.ngrok.io/api/v1/users/sign_in', {    
                         method: 'POST',
                         headers: {
                         'Accept': 'application/json',
@@ -45,18 +60,44 @@ export default class SignIn extends Component {
                         //console.log(error); 
                 })  
                 }
-        static navigationOptions = {
-            drawerIcon: ({ tintColor }) => (
-                <Icon name="ios-log-in" style={{ fontSize: 24, color: tintColor }} />
-            )
-        }
+        
     render() {
+        const marginLeft = this.animatedValue.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 300]
+              })
+              const opacity = this.animatedValue.interpolate({
+                inputRange: [0, 0.5, 1],
+                outputRange: [0, 1, 0]
+              })
+              const movingMargin = this.animatedValue.interpolate({
+                inputRange: [0, 0.5, 1],
+                outputRange: [0, 300, 0]
+              })
+              const textSize = this.animatedValue.interpolate({
+                inputRange: [0, 0.5, 1],
+                outputRange: [18, 32, 18]
+              })
+              const rotateX = this.animatedValue.interpolate({
+                inputRange: [0, 0.5, 1],
+                outputRange: ['0deg', '180deg', '0deg']
+              })
+
         return (
             <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.container}>
             <View style={styles.header}>
-                <Icon name='user-circle' type='font-awesome' size={100} color={'#fff'}/>
-                <Text style={{ fontSize: 34, color: '#fff', textAlign: 'center', margin: 10, fontWeight: 'bold', fontFamily: 'monospace' }}> Sign In </Text>
+                <Icon name='user-circle' type='font-awesome' size={120} color={'#fff'}/>
+                <Animated.Text
+                    style={{
+                      fontWeight:'bold',fontFamily: 'monospace',
+                      alignSelf: 'center',
+                      opacity,
+                      fontSize: 36,
+                      marginTop: 5,
+                      color: '#fff'}} >
+                      Sign In
+                    </Animated.Text>
             </View>
             <View style={styles.container1}>
             <View style={styles.SectionStyle}>
@@ -81,7 +122,7 @@ export default class SignIn extends Component {
             <TouchableOpacity style={styles.button} onPress={this.SignIn.bind(this)}>
             <Text style={styles.text}>Sign In</Text>
             </TouchableOpacity>
-            <Text style={{ fontSize: 15, color: '#037699', textAlign: 'center', margin: 30, fontWeight: 'bold', fontFamily: 'monospace' }} 
+            <Text style={{ fontSize: 16, color: '#037699', textAlign: 'center', margin: 25, fontWeight: 'bold', fontFamily: 'monospace' }} 
             onPress={() => this.props.navigation.push('SignUp')}>Create New Account! SignUp</Text>
         </View>
         </View>

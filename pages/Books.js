@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView, Modal, TouchableOpacity, Alert, 
 	Button, ActivityIndicator, 
-	Grid, TouchableWithoutFeedback, Keyboard } from 'react-native';
+	Grid, TouchableWithoutFeedback, Keyboard, Animated, Easing } from 'react-native';
 import { Header, Overlay, Input } from 'react-native-elements';
 import { Table, TableWrapper, Row, Cell, Col, Cols, Rows } from 'react-native-table-component';
 import { Left, Right, Icon } from 'native-base';
@@ -11,6 +11,7 @@ class Books extends Component {
   // constructor to initializing
 	constructor(props) {
 		super(props);
+		this.animatedValue = new Animated.Value(0);
 			this.state = {
 				tableHead: ['Id', 'Name', 'Price', 'Preface', 'Descript.', 'Action'],
 				//widthArr: [60, 110, 60, 90, 110, 130],
@@ -32,7 +33,8 @@ class Books extends Component {
 	// onPageLoad this function automatically call to fetch API data in table
 	
 componentDidMount() {
-	fetch("https://9b7b4bbf.ngrok.io/api/v1/books", {
+	this.animate();
+	fetch("https://77da6709.ngrok.io/api/v1/books", {
 		method: 'GET',
 		headers: {
 				'Accept': 'application/json',
@@ -63,9 +65,21 @@ componentDidMount() {
 	});
 }
 
+	animate () {
+          this.animatedValue.setValue(0)
+          Animated.timing(
+            this.animatedValue,
+            {
+              toValue: 1,
+              duration: 2000,
+              easing: Easing.linear
+            }
+          ).start(() => this.animate())
+        }
+
 //  OnPress save button, overlay form data create the book
 createBook(){
-	fetch('https://9b7b4bbf.ngrok.io/api/v1/books', {    
+	fetch('https://77da6709.ngrok.io/api/v1/books', {    
 		method: 'POST',
 		headers: {
 		'Accept': 'application/json',
@@ -98,7 +112,7 @@ createBook(){
 
 // editBook(edit){ 
 // 	 console.log(edit)
-// 	fetch('https://9b7b4bbf.ngrok.io/api/v1/books/', {   
+// 	fetch('https://77da6709.ngrok.io/api/v1/books/', {   
 // 		method: 'put',
 // 		headers: {
 // 		'Accept': 'application/json',
@@ -131,7 +145,7 @@ createBook(){
 //  OnPress delete button, book delete from table
 
 deleteBook(del){		 
-	fetch('https://9b7b4bbf.ngrok.io/api/v1/books/'+ this[0], {
+	fetch('https://77da6709.ngrok.io/api/v1/books/'+ this[0], {
 		method: 'DELETE', 
 		headers: {
 			'Accept': 'application/json',
@@ -163,7 +177,7 @@ deleteBook(del){
 // onPress row navigate to show details of respective book
 
 	DetailsShow(data,nstate) {
-		fetch("https://9b7b4bbf.ngrok.io/api/v1/books/" + this[0], {
+		fetch("https://77da6709.ngrok.io/api/v1/books/" + this[0], {
 			method: 'GET',
 			headers: {
 					'Accept': 'application/json',
@@ -180,6 +194,26 @@ deleteBook(del){
 }	
 
 render() {
+	const marginLeft = this.animatedValue.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 300]
+              })
+              const opacity = this.animatedValue.interpolate({
+                inputRange: [0, 0.5, 1],
+                outputRange: [0, 1, 0]
+              })
+              const movingMargin = this.animatedValue.interpolate({
+                inputRange: [0, 0.5, 1],
+                outputRange: [0, 300, 0]
+              })
+              const textSize = this.animatedValue.interpolate({
+                inputRange: [0, 0.5, 1],
+                outputRange: [18, 32, 18]
+              })
+              const rotateX = this.animatedValue.interpolate({
+                inputRange: [0, 0.5, 1],
+                outputRange: ['0deg', '180deg', '0deg']
+              });
 	const state = this.state;
 	const newstate = this;
 	const element = (data) => (
@@ -201,7 +235,16 @@ render() {
 					<Header
 							leftComponent={<Icon name="menu" onPress={() => this.props.navigation.openDrawer()} />}
 					/>
-					<Text style={styles.books}>Library Books</Text>
+					<Animated.Text
+                    style={{
+                      fontWeight:'bold',fontFamily: 'monospace',
+                      alignSelf: 'center',
+                      transform: [{rotateX}],
+                      fontSize: 28,
+                      marginTop: 5,
+                      color: '#037699'}} >
+                      Library Books
+                    </Animated.Text>
 
 				{/* Overlay to create a book in table */}
 <Overlay transparent={true} isVisible={this.state.isVisible}>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Animated, Easing } from 'react-native';
 import { Header, Image, Button } from 'react-native-elements';
 import { Left, Right, Icon } from 'native-base';
 import { SliderBox } from 'react-native-image-slider-box';
@@ -9,6 +9,7 @@ class Homepage extends Component {
 
     constructor(props) {
         super(props);
+        this.animatedValue = new Animated.Value(0);
         this.state = {
           images: [
             'https://wallpaperaccess.com/full/279563.jpg',
@@ -19,13 +20,58 @@ class Homepage extends Component {
         };
       }
 
+      componentDidMount () {
+          this.animate()
+        }
+
+        animate () {
+          this.animatedValue.setValue(0)
+          Animated.timing(
+            this.animatedValue,
+            {
+              toValue: 1,
+              duration: 2000,
+              easing: Easing.linear
+            }
+          ).start(() => this.animate())
+        }
+
     render() {
+        const marginLeft = this.animatedValue.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 300]
+              })
+              const opacity = this.animatedValue.interpolate({
+                inputRange: [0, 0.5, 1],
+                outputRange: [0, 1, 0]
+              })
+              const movingMargin = this.animatedValue.interpolate({
+                inputRange: [0, 0.5, 1],
+                outputRange: [0, 300, 0]
+              })
+              const textSize = this.animatedValue.interpolate({
+                inputRange: [0, 0.5, 1],
+                outputRange: [18, 32, 18]
+              })
+              const rotateX = this.animatedValue.interpolate({
+                inputRange: [0, 0.5, 1],
+                outputRange: ['0deg', '180deg', '0deg']
+              })
         return (
             <View style={styles.container}>
                 <Header
                     leftComponent={<Icon name="menu" onPress={() => this.props.navigation.openDrawer()} />}
                 />
-                <Text style= {{margin:10,fontFamily: 'monospace', fontWeight:'bold', alignSelf:'center', fontSize:20}}>Home Page</Text>
+                    <Animated.Text
+                    style={{
+                      fontWeight:'bold',fontFamily: 'monospace',
+                      alignSelf: 'center',
+                      transform: [{rotateX}],
+                      fontSize: 28,
+                      marginTop: 5,
+                      color: '#037699'}} >
+                      Home Page
+                    </Animated.Text>
                 <SliderBox
                 images={this.state.images}
                 sliderBoxHeight={300}

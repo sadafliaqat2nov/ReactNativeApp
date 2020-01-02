@@ -158,9 +158,14 @@ const Pages = createStackNavigator ({
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',
-    // initialRouteName: 'Pages',
+    //initialRouteName: 'Pages',
     drawerWidth: (width / 3) * 2
   });
 
-  const App = createAppContainer(Drawer);
-  export default App;
+  const InitialNavigator = createSwitchNavigator({
+  Splash: SplashScreen,
+  App: Drawer
+  });
+
+const App = createAppContainer(InitialNavigator);
+export default App;

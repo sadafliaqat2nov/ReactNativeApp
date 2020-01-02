@@ -75,9 +75,10 @@ const styles = StyleSheet.create({
 	  fontFamily: 'monospace'
 	},
 	info:{
-	  fontSize:20,
+	  fontSize:18,
 	  color: "#00BFFF",
-	  marginTop:10
+	  marginTop:10,
+	  fontWeight: 'bold'
 	},
 	description: {
 	  fontSize:18,

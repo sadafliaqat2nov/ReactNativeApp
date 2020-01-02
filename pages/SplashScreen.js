@@ -1,40 +1,36 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Header } from 'react-native-elements';
-import { Left, Right, Icon } from 'native-base';
+import { Icon } from 'react-native-elements'
 
 class SplashScreen extends Component {
-
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { isLoading: true }
-  // }
-
-  async componentDidMount() {
-    // Preload data from an external API
-    // Preload data using AsyncStorage
-    const data = await this.performTimeConsumingTask();
-  
-    if (data !== null) {
-      this.setState({ isLoading: false });
-    }
-  }
 
   performTimeConsumingTask = async() => {
     return new Promise((resolve) =>
       setTimeout(
         () => { resolve('result') },
-        2000
+        3000
       )
     )
+  }
+
+  async componentDidMount() {
+    // Preload data from an external API
+    // Preload data using AsyncStorage
+    const data = await this.performTimeConsumingTask();
+
+    if (data !== null) {
+      this.props.navigation.navigate('App');
+    }
   }
 
   render () {
       return (
         <View style={styles.viewStyles}>
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Icon name='cube' type='font-awesome' size={220} color={'#037699'}/>
             <Text style={styles.textStyles}>
-                Splash Screen
+               Hey, Welcome!
             </Text>
             </View>
         </View>
@@ -47,12 +43,14 @@ const styles = {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: 'orange'
+      backgroundColor: '#fff'
     },
     textStyles: {
-      color: 'white',
-      fontSize: 40,
-      fontWeight: 'bold'
+      color: '#037699',
+      fontSize: 38,
+      fontWeight: 'bold',
+      fontWeight:'bold', fontFamily: 'monospace',
+      padding: 20, margin: 20
     }
   }
 
