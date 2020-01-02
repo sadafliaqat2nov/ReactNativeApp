@@ -49,7 +49,7 @@ class SignUp extends Component {
         if (Platform.OS === 'ios'){
             return (
                 <View>
-                    <Text style={{ fontSize: 16, textAlign: 'left', fontWeight: 'bold', marginTop: 15, fontFamily: 'monospace' }}>Select Status</Text>
+                    <Text style={{ fontSize: 18, textAlign: 'center', fontWeight: 'bold', marginTop: 5, fontFamily: 'monospace' }}>Select Status</Text>
                     <Picker
                         style={{justifyContent: 'center'}}
                         selectedValue={(this.state && this.state.TextInputStatus) || 'pending'}
@@ -59,7 +59,7 @@ class SignUp extends Component {
                         <Picker.Item label="Pending" value="pending" />
                         <Picker.Item label="Confirmed" value="confirmed" />
                     </Picker>
-                    <Text style={{ fontSize: 16, textAlign: 'left', fontWeight: 'bold', marginTop: 15, fontFamily: 'monospace' }}>Select Role</Text>
+                    <Text style={{ fontSize: 18, textAlign: 'center', fontWeight: 'bold', marginTop: 5, fontFamily: 'monospace' }}>Select Role</Text>
                     <Picker
                         style={{justifyContent: 'center'}}
                         selectedValue={(this.state && this.state.TextInputRole) || 'admin_user'}
@@ -161,6 +161,7 @@ class SignUp extends Component {
         const { navigate } = this.props.navigation;
         if (this.state.isfontLoaded){
           return (
+            <ScrollView>
             <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.container}>
             <View style={styles.header}>
@@ -178,7 +179,7 @@ class SignUp extends Component {
             </View>
             <View style={styles.container1}>
             <View style={styles.SectionStyle}>
-              <Icon name='user' type='font-awesome' size={30} color={'#037699'} style={{margin: 10, padding: 10, marginLeft: 20}}/>
+              <Icon name='user' type='font-awesome' size={22} color={'#037699'} style={{margin: 10, padding: 10, marginLeft: 20}}/>
               <TextInput
                 style={{ flex: 1, marginLeft: 10 }}
                 placeholder="Enter Your First Name"
@@ -187,7 +188,7 @@ class SignUp extends Component {
               />
             </View>
             <View style={styles.SectionStyle}>
-              <Icon name='user' type='font-awesome' size={30} color={'#037699'} style={{margin: 10, padding: 10, marginLeft: 20}}/>
+              <Icon name='user' type='font-awesome' size={22} color={'#037699'} style={{margin: 10, padding: 10, marginLeft: 20}}/>
               <TextInput
                 style={{ flex: 1, marginLeft: 10 }}
                 placeholder="Enter Your Last Name"
@@ -196,7 +197,7 @@ class SignUp extends Component {
               />
             </View>
             <View style={styles.SectionStyle}>
-              <Icon name='envelope' type='font-awesome' size={30} color={'#037699'} style={{margin: 10, padding: 10, marginLeft: 20}}/>
+              <Icon name='envelope' type='font-awesome' size={22} color={'#037699'} style={{margin: 10, padding: 10, marginLeft: 20}}/>
               <TextInput
                 style={{ flex: 1, marginLeft: 10 }}
                 placeholder="Enter Your Email Here"
@@ -205,7 +206,7 @@ class SignUp extends Component {
               />
             </View>
              <View style={styles.SectionStyle}>
-              <Icon name='lock' type='font-awesome' size={38} color={'#037699'} style={{margin: 10, padding: 10, marginLeft: 20}}/>
+              <Icon name='lock' type='font-awesome' size={22} color={'#037699'} style={{margin: 10, padding: 10, marginLeft: 20}}/>
               <TextInput
                 style={{ flex: 1, marginLeft: 10 }}
                 placeholder="Enter Your Password"
@@ -225,6 +226,7 @@ class SignUp extends Component {
         </View>
         </View>
         </TouchableWithoutFeedback>
+        </ScrollView>
             )
 
         }else{
@@ -242,7 +244,7 @@ const styles = StyleSheet.create({
   },
   container1: {
     flex: 1,
-    marginTop: -10,
+    marginTop: 5,
     justifyContent: 'center',
     alignItems: 'center',
   },

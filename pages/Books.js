@@ -218,7 +218,7 @@ render() {
 	const newstate = this;
 	const element = (data) => (
 		<View style={styles.btnView1}>
-				<TouchableOpacity style={styles.edit} onPress={() => { this.toggleOverlay(true) }}>
+				<TouchableOpacity style={styles.edit}>
 						<Text style={{ fontFamily: 'monospace',textAlign:'center', justifyContent: 'center',fontWeight: 'bold', padding: 3, fontSize: 18, alignItems:'center', color: '#fff' }}>
 						<Icon name="create" style={{ color: '#fff', fontSize: 25 }}></Icon>
 						</Text>
@@ -308,70 +308,8 @@ render() {
 				<Text style={styles.btnText}>Create Book <Icon name="add-circle" style={{ color: '#fff', fontSize: 25 }}></Icon></Text>
 		</TouchableOpacity>
 
-{/* Overlay to create a book in table */}
-<Overlay transparent={true} isVisible={this.state.isVisible}>
-<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-	<View style={styles.overlay}>
-			<Text style={styles.formText}>Update Information about Book!</Text>
-			<Icon
-							name='book'
-							style={styles.overlayIcons1}
-			/>
-			<Input placeholder='Name...'
-					onChangeText={updatename => this.setState({ updatename })} 
-					leftIcon={ <Icon
-					name='book'
-					style={styles.overlayIcons}
-					//value={this.state.checkedElement.length > 0 ? this.state.checkedElement[1] : ' '}
-					/>
-			}
-			/>
-			<Input placeholder='Price...' 
-					onChangeText={updateprice => this.setState({ updateprice })}
-					leftIcon={ <Icon
-					name='pricetag'
-					style={styles.overlayIcons}
-					//value={this.state.checkedElement.length > 0 ? this.state.checkedElement[2] : ' '}
-					/>
-			}
-			/>
-			<Input placeholder='Preface...' 
-					onChangeText={updatepreface => this.setState({ updatepreface })}
-					leftIcon={ <Icon
-					name='list-box'
-					style={styles.overlayIcons}
-					//value={this.state.checkedElement.length > 0 ? this.state.checkedElement[3] : ' '}
-					/>
-			}
-			/>
-			<Input placeholder='Description...' 
-					onChangeText={updatedescription => this.setState({ updatedescription })}
-					leftIcon={ <Icon
-					name='document'
-					style={styles.overlayIcons}
-					//value={this.state.checkedElement.length > 0 ? this.state.checkedElement[4] : ' '}
-					/>
-			}
-			/>
-
-			<View style={styles.btnView}>
-			<TouchableOpacity style={styles.closeBtn1}>
-					<Text style={{ fontFamily: 'monospace',textAlign:'center', justifyContent: 'center',fontWeight: 'bold', padding: 3, fontSize: 18, alignItems:'center', color: '#fff' }}>
-					Save <Icon name="checkmark-circle" style={{ color: '#fff', fontSize: 22 }}></Icon>
-					</Text>
-			</TouchableOpacity>
-			<TouchableOpacity style={styles.closeBtn} onPress={() => 
-							{this.toggleOverlay(!this.state.isVisible) }}>
-					<Text style={{ fontFamily: 'monospace', textAlign:'center', justifyContent: 'center', fontWeight: 'bold', padding: 3, fontSize: 18, alignItems:'center', color: '#fff' }}>
-					Close <Icon name="close" style={{ color: '#fff', fontSize: 20 }}></Icon>
-					</Text>
-			</TouchableOpacity>
-			</View>
-		</View>
-		</TouchableWithoutFeedback>
-</Overlay>
-
 		{/* table which display details of book */}
+
 		<ScrollView horizontal={true}>
 				<View>
 				<Table borderStyle={{ borderWidth: 1, borderColor: '#C1C0B9' }}>

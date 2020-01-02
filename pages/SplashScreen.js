@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Header } from 'react-native-elements';
-import { Icon } from 'react-native-elements'
+import { Icon } from 'react-native-elements';
+//import * as Font from 'expo-font';
 
 class SplashScreen extends Component {
 
@@ -49,7 +50,7 @@ const styles = {
       color: '#037699',
       fontSize: 38,
       fontWeight: 'bold',
-      fontWeight:'bold', fontFamily: 'monospace',
+      fontWeight:'bold',
       padding: 20, margin: 20
     }
   }

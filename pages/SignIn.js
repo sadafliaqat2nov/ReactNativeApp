@@ -101,7 +101,7 @@ export default class SignIn extends Component {
             </View>
             <View style={styles.container1}>
             <View style={styles.SectionStyle}>
-              <Icon name='envelope' type='font-awesome' size={30} color={'#037699'} style={{margin: 10, padding: 10, marginLeft: 20}}/>
+              <Icon name='envelope' type='font-awesome' size={22} color={'#037699'} style={{margin: 10, padding: 10, marginLeft: 20}}/>
               <TextInput
                 style={{ flex: 1, marginLeft: 10 }}
                 placeholder="Enter Your Email Here"
@@ -110,7 +110,7 @@ export default class SignIn extends Component {
               />
             </View>
              <View style={styles.SectionStyle}>
-              <Icon name='lock' type='font-awesome' size={38} color={'#037699'} style={{margin: 10, padding: 10, marginLeft: 20}}/>
+              <Icon name='lock' type='font-awesome' size={22} color={'#037699'} style={{margin: 10, padding: 10, marginLeft: 20}}/>
               <TextInput
                 style={{ flex: 1, marginLeft: 10 }}
                 placeholder="Enter Your Password"
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
   },
   container1: {
     flex: 1,
-    marginTop: -150,
+    marginTop: -70,
     justifyContent: 'center',
     alignItems: 'center',
   },
